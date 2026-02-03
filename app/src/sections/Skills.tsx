@@ -1,15 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
 import { 
   TrendingUp, 
   Smartphone, 
   FileText, 
   BarChart3, 
-  Users, 
   Bot,
   Megaphone,
   ShoppingBag,
   Briefcase
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface Skill {
   icon: React.ReactNode;
@@ -70,33 +69,13 @@ const skillsData: Skill[] = [
 ];
 
 function SkillCard({ skill, index }: { skill: Skill; index: number }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), index * 50);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [index]);
-
   return (
-    <div 
-      ref={ref}
-      className={`bg-white border border-gray-100 rounded-xl p-4 sm:p-5 hover:border-gray-200 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className="bg-white border border-gray-100 rounded-xl p-4 sm:p-5 hover:border-gray-200 hover:shadow-sm transition-all"
     >
       {/* Icon */}
       <div className="w-9 h-9 bg-gray-100 rounded-lg flex items-center justify-center mb-3">
@@ -120,41 +99,21 @@ function SkillCard({ skill, index }: { skill: Skill; index: number }) {
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Skills() {
-  const [headerVisible, setHeaderVisible] = useState(false);
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHeaderVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (headerRef.current) {
-      observer.observe(headerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="skills" className="py-16 bg-gray-50">
+    <section id="skills" className="py-16 bg-gray-50 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div 
-          ref={headerRef}
-          className={`text-center mb-10 transition-all duration-700 ${
-            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
             ما أتميز به
@@ -165,7 +124,7 @@ export default function Skills() {
           <p className="text-gray-500 max-w-xl mx-auto text-sm">
             مجموعة متكاملة من المهارات الاستراتيجية في التجارة الإلكترونية، تطوير الأعمال، والتسويق الرقمي
           </p>
-        </div>
+        </motion.div>
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">

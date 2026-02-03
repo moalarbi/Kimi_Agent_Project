@@ -3,8 +3,8 @@
 هذا المستودع يحتوي على مشروع الموقع الشخصي والسيرة الذاتية لمحمد العربي.
 
 ## روابط المشروع
-- **الموقع الحي:** [https://moalarbi.github.io/Kimi_Agent_Project/](https://moalarbi.github.io/Kimi_Agent_Project/)
-- **المستودع على GitHub:** [https://github.com/moalarbi/Kimi_Agent_Project](https://github.com/moalarbi/Kimi_Agent_Project)
+- **الموقع الحي:** [https://moalarbi.github.io/Mohamed-Alarbi-Portfolio/](https://moalarbi.github.io/Mohamed-Alarbi-Portfolio/)
+- **المستودع على GitHub:** [https://github.com/moalarbi/Mohamed-Alarbi-Portfolio](https://github.com/moalarbi/Mohamed-Alarbi-Portfolio)
 
 ## محتويات المستودع
 - `app/`: الكود المصدري للموقع (React + Vite + Tailwind CSS).
@@ -17,3 +17,6 @@
 - Lucide React (الأيقونات)
 - Framer Motion (التحريك)
 - n8n (الأتمتة)
+
+## الحقوق
+جميع الحقوق محفوظة © 2026 محمد العربي

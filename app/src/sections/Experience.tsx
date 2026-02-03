@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ExperienceItem {
   title: string;
@@ -41,33 +41,13 @@ const experiences: ExperienceItem[] = [
 ];
 
 function ExperienceCard({ experience, index }: { experience: ExperienceItem; index: number }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), index * 150);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [index]);
-
   return (
-    <div 
-      ref={ref}
-      className={`bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 transition-all duration-700 hover:border-gray-200 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+    <motion.div 
+      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 hover:border-gray-200 hover:shadow-sm transition-all"
     >
       {/* Header */}
       <div className="flex flex-col gap-3 mb-4">
@@ -107,41 +87,21 @@ function ExperienceCard({ experience, index }: { experience: ExperienceItem; ind
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Experience() {
-  const [headerVisible, setHeaderVisible] = useState(false);
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHeaderVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (headerRef.current) {
-      observer.observe(headerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="experience" className="py-16 bg-white">
+    <section id="experience" className="py-16 bg-white overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div 
-          ref={headerRef}
-          className={`text-center mb-10 transition-all duration-700 ${
-            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
             مسيرتي المهنية
@@ -152,7 +112,7 @@ export default function Experience() {
           <p className="text-gray-500 max-w-xl mx-auto text-sm">
             رحلة عمل تمتد لأكثر من 12 عاماً في مجال التجارة الإلكترونية، تطوير الأعمال، والتسويق الرقمي
           </p>
-        </div>
+        </motion.div>
 
         {/* Experience Cards */}
         <div className="space-y-4">

@@ -1,91 +1,59 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { TrendingUp, Users, Briefcase, Target } from 'lucide-react';
+import { motion, useSpring, useTransform, animate } from 'framer-motion';
 
 interface StatItemProps {
   icon: React.ReactNode;
   value: string;
   label: string;
   suffix?: string;
-  delay: number;
+  index: number;
 }
 
-function StatItem({ icon, value, label, suffix = '', delay }: StatItemProps) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+function StatItem({ icon, value, label, suffix = '', index }: StatItemProps) {
+  const [displayValue, setDisplayValue] = useState(0);
   const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [delay]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const duration = 2000;
-    const steps = 60;
-    const increment = numericValue / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= numericValue) {
-        setCount(numericValue);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [isVisible, numericValue]);
-
   return (
-    <div 
-      ref={ref}
-      className={`text-center transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onViewportEnter={() => {
+        const controls = animate(0, numericValue, {
+          duration: 2,
+          onUpdate: (latest) => setDisplayValue(Math.floor(latest))
+        });
+        return () => controls.stop();
+      }}
+      className="text-center"
     >
-      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-sm">
         {icon}
       </div>
       <div className="text-2xl sm:text-4xl font-bold text-black mb-1">
-        {count}{suffix}
+        {displayValue}{suffix}
       </div>
       <div className="text-gray-400 text-xs sm:text-sm">{label}</div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Stats() {
   const stats = [
-    { icon: <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '40', label: 'تحسين كفاءة الحملات %', suffix: '%', delay: 0 },
-    { icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '70', label: 'نمو المتابعين %', suffix: '%', delay: 100 },
-    { icon: <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '60', label: 'علامة تجارية', suffix: '+', delay: 200 },
-    { icon: <Target className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '12', label: 'سنة خبرة', suffix: '+', delay: 300 },
+    { icon: <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '40', label: 'تحسين كفاءة الحملات %', suffix: '%' },
+    { icon: <Users className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '70', label: 'نمو المتابعين %', suffix: '%' },
+    { icon: <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '60', label: 'علامة تجارية', suffix: '+' },
+    { icon: <Target className="w-4 h-4 sm:w-5 sm:h-5 text-black" />, value: '12', label: 'سنة خبرة', suffix: '+' },
   ];
 
   return (
-    <section className="py-12 sm:py-16 bg-gray-50">
+    <section className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {stats.map((stat, index) => (
-            <StatItem key={index} {...stat} />
+            <StatItem key={index} {...stat} index={index} />
           ))}
         </div>
       </div>

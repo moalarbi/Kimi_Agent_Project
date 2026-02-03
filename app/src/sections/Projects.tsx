@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface Project {
   name: string;
@@ -76,33 +76,13 @@ const projects: Project[] = [
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), index * 100);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [index]);
-
   return (
-    <div 
-      ref={ref}
-      className={`group bg-white border border-gray-100 rounded-2xl p-5 hover:border-gray-200 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group bg-white border border-gray-100 rounded-2xl p-5 hover:border-gray-200 transition-all duration-500 hover:shadow-md"
     >
       {/* Category Badge */}
       <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${project.color}`}>
@@ -134,41 +114,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ))}
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Projects() {
-  const [headerVisible, setHeaderVisible] = useState(false);
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHeaderVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (headerRef.current) {
-      observer.observe(headerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="projects" className="py-16 bg-white">
+    <section id="projects" className="py-16 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div 
-          ref={headerRef}
-          className={`text-center mb-10 transition-all duration-700 ${
-            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">
             أعمالي
@@ -179,7 +139,7 @@ export default function Projects() {
           <p className="text-gray-500 max-w-xl mx-auto text-sm">
             نبذة عن بعض المشاريع والخبرات الاستراتيجية في التجارة الإلكترونية وتطوير الأعمال
           </p>
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
