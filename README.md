@@ -3,7 +3,7 @@
 هذا المستودع يحتوي على مشروع الموقع الشخصي والسيرة الذاتية لمحمد العربي.
 
 ## روابط المشروع
-- **الموقع الحي:** [https://nh3bvuohvv4lc.ok.kimi.link/](https://nh3bvuohvv4lc.ok.kimi.link/)
+- **الموقع الحي:** [https://moalarbi.github.io/Kimi_Agent_Project/](https://moalarbi.github.io/Kimi_Agent_Project/)
 - **المستودع على GitHub:** [https://github.com/moalarbi/Kimi_Agent_Project](https://github.com/moalarbi/Kimi_Agent_Project)
 
 ## محتويات المستودع
@@ -16,6 +16,4 @@
 - Tailwind CSS
 - Lucide React (الأيقونات)
 - Framer Motion (التحريك)
-
----
-تم الرفع والتنظيم بواسطة Manus Agent.
+- n8n (الأتمتة)
