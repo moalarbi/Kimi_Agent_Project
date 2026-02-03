@@ -139,7 +139,7 @@ export default function Contact() {
                       target={info.href.startsWith('http') ? '_blank' : undefined}
                       rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-black hover:text-gray-600 transition-colors font-medium text-sm truncate block"
-                      dir={info.isPhone ? "ltr" : undefined}
+                      dir="ltr"
                     >
                       {info.value}
                     </a>
