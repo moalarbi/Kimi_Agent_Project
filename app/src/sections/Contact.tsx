@@ -6,6 +6,7 @@ interface ContactInfo {
   label: string;
   value: string;
   href?: string;
+  isPhone?: boolean;
 }
 
 const contactInfo: ContactInfo[] = [
@@ -19,7 +20,8 @@ const contactInfo: ContactInfo[] = [
     icon: <Phone className="w-4 h-4" />,
     label: 'رقم الهاتف',
     value: '+966 53 731 1886',
-    href: 'tel:+966537311886'
+    href: 'https://wa.me/966537311886',
+    isPhone: true
   },
   {
     icon: <Linkedin className="w-4 h-4" />,
@@ -137,6 +139,7 @@ export default function Contact() {
                       target={info.href.startsWith('http') ? '_blank' : undefined}
                       rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-black hover:text-gray-600 transition-colors font-medium text-sm truncate block"
+                      dir={info.isPhone ? "ltr" : undefined}
                     >
                       {info.value}
                     </a>

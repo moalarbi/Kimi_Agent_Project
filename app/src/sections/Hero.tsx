@@ -104,13 +104,15 @@ export default function Hero() {
                     <span className="text-sm text-gray-600">dr.al3rbi@gmail.com</span>
                   </a>
                   <a 
-                    href="tel:+966537311886"
+                    href="https://wa.me/966537311886"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-3 p-2.5 bg-white rounded-xl hover:bg-gray-100 transition-colors"
                   >
                     <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
                       <Phone className="w-4 h-4 text-black" />
                     </div>
-                    <span className="text-sm text-gray-600">+966 53 731 1886</span>
+                    <span className="text-sm text-gray-600" dir="ltr">+966 53 731 1886</span>
                   </a>
                   <a 
                     href="https://linkedin.com/in/moal3rbi"
@@ -163,7 +165,9 @@ export default function Hero() {
                 <Mail className="w-4 h-4" />
               </a>
               <a 
-                href="tel:+966537311886"
+                href="https://wa.me/966537311886"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
               >
                 <Phone className="w-4 h-4" />
