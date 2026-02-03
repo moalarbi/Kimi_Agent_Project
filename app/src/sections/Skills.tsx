@@ -7,7 +7,8 @@ import {
   Users, 
   Bot,
   Megaphone,
-  Funnel
+  ShoppingBag,
+  Briefcase
 } from 'lucide-react';
 
 interface Skill {
@@ -19,52 +20,52 @@ interface Skill {
 
 const skillsData: Skill[] = [
   {
-    icon: <TrendingUp className="w-4 h-4" />,
-    title: 'Brand Growth Strategy',
-    description: 'استراتيجيات نمو العلامات التجارية',
-    skills: ['Awareness', 'Consideration', 'Conversion', 'Retention']
+    icon: <ShoppingBag className="w-4 h-4" />,
+    title: 'E-commerce Management',
+    description: 'إدارة وتطوير المتاجر الإلكترونية',
+    skills: ['Salla (سلة)', 'Zid (زد)', 'Product Catalog', 'Checkout Optimization']
   },
   {
     icon: <Megaphone className="w-4 h-4" />,
-    title: 'Performance Marketing',
-    description: 'تسويق الأداء والإعلانات المدفوعة',
-    skills: ['Meta Ads', 'TikTok Ads', 'Google Ads', 'Snapchat Ads']
+    title: 'Digital Marketing',
+    description: 'التسويق الإلكتروني المتكامل',
+    skills: ['Meta Ads', 'TikTok Ads', 'Snapchat Ads', 'Google Search/Display']
+  },
+  {
+    icon: <Briefcase className="w-4 h-4" />,
+    title: 'Business Development',
+    description: 'تطوير الأعمال والنمو',
+    skills: ['Market Entry', 'Strategic Partnerships', 'Revenue Growth', 'Process Improvement']
+  },
+  {
+    icon: <TrendingUp className="w-4 h-4" />,
+    title: 'Growth Strategy',
+    description: 'استراتيجيات النمو الرقمي',
+    skills: ['Funnel Strategy', 'Retention', 'Customer Acquisition', 'A/B Testing']
   },
   {
     icon: <Smartphone className="w-4 h-4" />,
     title: 'App Marketing',
     description: 'تسويق تطبيقات الجوال',
-    skills: ['User Acquisition', 'Retention', 'ASO', 'App Installs']
-  },
-  {
-    icon: <Funnel className="w-4 h-4" />,
-    title: 'Funnel Optimization',
-    description: 'تحسين مسارات التحويل',
-    skills: ['Offer Strategy', 'Landing Pages', 'Conversion Rate', 'A/B Testing']
+    skills: ['User Acquisition', 'ASO', 'App Installs', 'Engagement']
   },
   {
     icon: <FileText className="w-4 h-4" />,
     title: 'Content Systems',
     description: 'أنظمة المحتوى والإنتاج',
-    skills: ['Content Calendar', 'Creative Pipeline', 'UGC', 'Short-form Video']
+    skills: ['Content Calendar', 'UGC', 'Short-form Video', 'Copywriting']
   },
   {
     icon: <BarChart3 className="w-4 h-4" />,
     title: 'Analytics & Reporting',
     description: 'التحليلات والتقارير',
-    skills: ['Dashboards', 'KPIs', 'Insights', 'Data Analysis']
-  },
-  {
-    icon: <Users className="w-4 h-4" />,
-    title: 'Team Management',
-    description: 'إدارة الفرق والموردين',
-    skills: ['Design Teams', 'Content Teams', 'Media Buying', 'Production']
+    skills: ['Dashboards', 'KPIs', 'Data Insights', 'Performance Audit']
   },
   {
     icon: <Bot className="w-4 h-4" />,
-    title: 'AI Tools & Automation',
-    description: 'أدوات الذكاء الاصطناعي',
-    skills: ['ChatGPT', 'Midjourney', 'n8n/Zapier', 'Prompt Engineering']
+    title: 'AI & Automation',
+    description: 'الذكاء الاصطناعي والأتمتة',
+    skills: ['ChatGPT/Prompting', 'Midjourney', 'Zapier/n8n', 'Workflow Automation']
   }
 ];
 
@@ -162,7 +163,7 @@ export default function Skills() {
             المهارات الأساسية
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto text-sm">
-            مجموعة متكاملة من المهارات التقنية والاستراتيجية في مجال التسويق الرقمي
+            مجموعة متكاملة من المهارات الاستراتيجية في التجارة الإلكترونية، تطوير الأعمال، والتسويق الرقمي
           </p>
         </div>
 
